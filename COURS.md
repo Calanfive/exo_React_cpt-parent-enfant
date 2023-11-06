@@ -28,31 +28,38 @@ const ProfName = (props) => {
 
 Enfant -> Parent
 
-Les Ã©vÃ©nements permettent de remonter des informations d'un composant enfant Ã  un composant parent.
+Les événements permettent de remonter des informations d'un composant enfant à un composant parent.
 
 ```tsx
 const App = () => {
     const [name, setName] = useState('toto');
 
-    const handleNameChange = (newName) => {
+    const handleNameChange = (newName: string) => {
         setName(newName);
     };
 
     return (
         <div>
-            <ProfName name={name} onNameChange={handleNameChange} />
+            <ProfName onNameChange={handleNameChange} />
+            <p>{name}</p>
         </div>
     );
 };
 
-const ProfName = (props) => {
+const ProfName = (props: { onChange: (val: string) => void }) => {
+
+    const handleNameChange = useCallback(
+        () => {
+            props.onNameChange('titi');
+        }, [props.onNameChange]
+    );
+
     return (
         <div>
-            <h1>PrÃ©nom du prof : {props.name}</h1>
-            <button onClick={() => props.onNameChange('titi')}>Change name</button>
+            <button onClick={handleNameChange}>Change name</button>
         </div>
     );
 };
 ```
 
-Cela s'appelle le lifting state up ou la remontÃ©e de l'Ã©tat en franÃ§ais.
+Cela s'appelle le lifting state up ou la remontée de l'état en français.
