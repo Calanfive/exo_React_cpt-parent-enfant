@@ -21,6 +21,8 @@ const Counter4 = (props: { cpt: number }) => {
     return (
         <div className="cpt">
             <p>{inc}</p>
+            <p>{counter}</p>
+            <p>{props.cpt}</p>
             <button className='button' onClick={handleClick1}>+</button>
             <button className='button' onClick={handleClick2}>-</button>
         </div>
